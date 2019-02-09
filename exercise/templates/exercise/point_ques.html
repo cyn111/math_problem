@@ -1,0 +1,45 @@
+{% extends 'exercise/base.html'%}
+{%block body%}
+<h1>题目列表</h1>
+
+{%for i in ques%}
+<p>
+	<a href="{% url 'exercise:题目' i.id%}">{{i}}</a> 
+	
+</p>
+{%endfor%}
+	
+
+<div class="pagination">
+	<span class="step-links">
+		{% if ques.has_previous %}
+		<a href="?page={{ ques.previous_page_number }}">上一页</a>
+		{% endif %}
+
+
+		<!-- <span class="current">
+			Page {{ ques.number }} of {{ ques.paginator.num_pages }}.
+		</span>
+	
+	 -->
+		{% for p in ques.paginator.page_range%}
+		{% ifequal p ques.number %}
+		<span class="active"><a href="?page={{ p }}">{{p}}</a></span>
+		{% else %}
+		<span><a href="?page={{ p }}">{{p}}</a></span>
+
+
+
+		{% endifequal %}
+
+		{%endfor%}
+
+		{% if ques.has_next %}
+		<a href="?page={{ ques.next_page_number }}">下一页</a>
+		{% endif %}
+	</span>
+</div>
+
+
+
+{%endblock body%}

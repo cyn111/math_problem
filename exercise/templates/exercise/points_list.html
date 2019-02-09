@@ -1,0 +1,47 @@
+{% extends 'exercise/base.html'%}
+
+
+{%block body%}
+<h1>知识点列表</h1>
+
+
+
+{% for i in point %}
+<a href="{% url 'exercise:题目列表' i.id %}">{{i}}</a>
+<br>
+
+{% endfor %}
+
+<div class="pagination">
+	<span class="step-links">
+		{% if point.has_previous %}
+		<a href="?page={{ point.previous_page_number }}">上一页</a>
+		{% endif %}
+
+
+		<!-- <span class="current">
+			Page {{ point.number }} of {{ point.paginator.num_pages }}.
+		</span>
+	
+	 -->
+		{% for p in point.paginator.page_range%}
+		{% ifequal p point.number %}
+		<span class="active"><a href="?page={{ p }}">{{p}}</a></span>
+		{% else %}
+		<span><a href="?page={{ p }}">{{p}}</a></span>
+
+
+
+		{% endifequal %}
+
+		{%endfor%}
+
+		{% if point.has_next %}
+		<a href="?page={{ point.next_page_number }}">下一页</a>
+		{% endif %}
+	</span>
+</div>
+
+
+
+{%endblock body%}

@@ -1,0 +1,29 @@
+{% extends 'myauth/base.html'%}
+{%block body%}
+<h1>个人中心</h1>
+
+<a href="{%url 'myauth:主页' %}">回到主页</a> 
+<a href="{%url 'myauth:编辑个人信息' %}">编辑个人信息</a> 
+<a href="{%url 'myauth:修改密码' %}">修改密码</a> 
+<a href="{%url 'myauth:登出' %}">登出</a> 
+
+<div>
+	<p>{{user.username}}</p>
+	<p>{{user.email}}</p>
+	<p>{{ user.student.nickname }}</p>
+	<p>{{ user.student.sex }}</p>
+	<p>{{ user.student.classroom }}</p>
+	<p>{{ user.student.birthday }}</p>
+	
+
+
+	
+
+
+	
+	
+	
+
+</div>
+{%endblock body%}
+

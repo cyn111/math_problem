@@ -1,0 +1,60 @@
+{% extends 'exercise/base.html'%}
+
+{%block body%}
+<h1>题目</h1>
+<!-- <h3>{{题目.title}}</h3> -->
+<h5>题目</h5>
+{%for i in 题目.ques %}
+{%if i|slice:"4" == "http" %}
+<img src="{{i}}" alt="图片">
+
+{%else%}
+{{i}}
+{%endif%}
+{%endfor%}
+<br>
+<h5>题型</h5>
+
+{{题目.ques_type}}
+<br>
+
+{% if 显示答案 %}
+<h5>答案</h5>
+{%for i in 题目.answer %}
+{%if i|slice:"4" == "http" %}
+<img src="{{i}}" alt="图片">
+
+{%else%}
+{{i}}
+{%endif%}
+{%endfor%}
+<br>
+{%elif 开始作答%}
+<h5> 开始作答</h5>
+<form action="" method="POST">
+	{% csrf_token %}
+	{% if 上次答案 %}
+	<input type="text" value="{{上次答案}}" name="输入答案">
+
+	{% else%}
+	<input type="text" placeholder="请输入答案" name="输入答案">
+	{% endif %}
+	<button>提交</button>
+</form>
+{%elif 检查答案%}
+<h5>检查答案</h5>
+<h6>我的答案</h6>
+{{我的答案}}
+<h6>答案</h6>
+{%for i in 题目.answer %}
+{%if i|slice:"4" == "http" %}
+<img src="{{i}}" alt="图片">
+
+{%else%}
+{{i}}
+{%endif%}
+{%endfor%}
+{%endif%}
+<h5>考点</h5>
+{{题目.ques_points}}
+{%endblock body%}
